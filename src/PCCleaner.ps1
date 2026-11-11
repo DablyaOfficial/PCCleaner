@@ -38,16 +38,19 @@ $script:LogFile = Join-Path $script:AppDir 'PCCleaner.log'
 # ---------- Списки классификации ----------
 # Appx: известный "мусор" (регулярные выражения по имени пакета)
 $BloatAppx = @(
-    '^Microsoft\.Bing', '^Microsoft\.GetHelp$', '^Microsoft\.Getstarted$',
+    '^Microsoft\.Bing', '^Microsoft\.Getstarted$',
     '^Microsoft\.MicrosoftOfficeHub$', '^Microsoft\.MicrosoftSolitaireCollection$',
     '^Microsoft\.People$', '^Microsoft\.PowerAutomateDesktop$', '^Microsoft\.Todos$',
     '^Microsoft\.WindowsFeedbackHub$', '^Microsoft\.WindowsMaps$',
-    '^Microsoft\.ZuneMusic$', '^Microsoft\.ZuneVideo$', '^Microsoft\.YourPhone$',
+    '^Microsoft\.ZuneVideo$', '^Microsoft\.YourPhone$',
     '^Clipchamp\.', '^MicrosoftTeams$', '^MSTeams$', '^Microsoft\.549981C3F5F10$',
     '^Microsoft\.MixedReality', '^Microsoft\.3DBuilder$', '^Microsoft\.Microsoft3DViewer$',
     '^Microsoft\.SkypeApp$', '^Microsoft\.OutlookForWindows$', '^Microsoft\.Windows\.DevHome$',
-    '^MicrosoftCorporationII\.QuickAssist$', '^MicrosoftCorporationII\.MicrosoftFamily$',
-    '^Microsoft\.Copilot$', '^Microsoft\.MicrosoftStickyNotes$', '^Microsoft\.Messaging$',
+    '^MicrosoftCorporationII\.MicrosoftFamily$',
+    '^Microsoft\.Copilot$', '^Microsoft\.Messaging$',
+    '^Microsoft\.NetworkSpeedTest$', '^Microsoft\.Office\.Sway$', '^Microsoft\.MicrosoftPowerBIForWindows$',
+    '^Microsoft\.(Microsoft)?PCManager$', '^Microsoft\.M365Companions$', '^Microsoft\.RemoteDesktop$',
+    '^Microsoft\.MSPaint$', '^Microsoft\.Windows\.AIHub$',
     '^Microsoft\.OneConnect$', '^Microsoft\.Print3D$', '^Microsoft\.Wallet$',
     '^Microsoft\.News$', '^Microsoft\.Office\.OneNote$', '^Microsoft\.MicrosoftJournal$',
     '^Microsoft\.Whiteboard$', '^Microsoft\.WindowsCommunicationsApps$',
@@ -58,14 +61,17 @@ $BloatAppx = @(
     'McAfee', 'Norton', 'ExpressVPN', 'Booking', 'WildTangent', 'Twitter',
     'BubbleWitch', 'FarmVille', 'RoyalRevolt', 'HiddenCity', 'MarchofEmpires',
     'Dropbox.*Promotion', 'PicsArt', 'Phototastic', 'Flipboard', 'Shazam', 'Viber.*Promo',
-    'Asphalt', 'AdobePhotoshopExpress', 'Plex$', 'Hulu', 'Pandora', 'iHeartRadio'
+    'Asphalt', 'AdobePhotoshopExpress', 'Plex$', 'Hulu', 'Pandora', 'iHeartRadio',
+    'ACGMediaPlayer', 'ActiproSoftware', 'AutodeskSketchBook', 'CaesarsSlots', 'COOKINGFEVER',
+    'DisneyMagicKingdoms', 'DrawboardPDF', 'NYTCrossword', 'OneCalendar', 'PolarrPhotoEditor',
+    'SlingTV', 'TuneInRadio', 'WinZipUniversal', 'CyberLinkMediaSuite', 'BytedancePte'
 )
 # Appx: защищено от удаления (нужно для работы Windows / магазина / других приложений)
 $ProtectedAppx = @(
     '^Microsoft\.WindowsStore$', '^Microsoft\.StorePurchaseApp$', '^Microsoft\.DesktopAppInstaller$',
     '^Microsoft\.VCLibs', '^Microsoft\.NET\.', '^Microsoft\.UI\.Xaml', '^Microsoft\.WindowsAppRuntime',
     'WinAppRuntime', '^Microsoft\.WidgetsPlatformRuntime$','^Microsoft\.DirectX', '^Microsoft\.Services\.Store',
-    '^Microsoft\.SecHealthUI$', '^Microsoft\.Windows\.', '^Windows\.', '^MicrosoftWindows\.Client\.(CBS|Core|AIX|LKG|FileExp|OOBE|Photon)',
+    '^Microsoft\.SecHealthUI$', '^Microsoft\.Windows\.(?!DevHome$|AIHub$|Photos$)', '^Windows\.', '^MicrosoftWindows\.Client\.(CBS|Core|AIX|LKG|FileExp|OOBE|Photon)',
     '^Microsoft\.AAD', '^Microsoft\.AccountsControl', '^Microsoft\.LockApp', '^Microsoft\.Win32WebViewHost',
     '^Microsoft\.MicrosoftEdge', '^Microsoft\.ECApp', '^Microsoft\.CredDialogHost', '^Microsoft\.AsyncTextService',
     '^Microsoft\.BioEnrollment', '^Microsoft\.LanguageExperiencePack', '^MicrosoftWindows\.UndockedDevKit',
@@ -77,7 +83,10 @@ $CautionAppx = @(
     '^Dolby', '^DTS', '^Synaptics', '^ELAN', '^Microsoft\.Xbox', '^Microsoft\.GamingApp$',
     '^Microsoft\.GamingServices$', '^Microsoft\.XboxGam', '^Microsoft\.WindowsTerminal$',
     '^Microsoft\.Windows(Calculator|Notepad|Camera|SoundRecorder|Alarms)$', '^Microsoft\.Paint$',
-    '^Microsoft\.ScreenSketch$', '^Microsoft\.Windows\.Photos$', '^Microsoft\.SecHealthUI$'
+    '^Microsoft\.ScreenSketch$', '^Microsoft\.Windows\.Photos$', '^Microsoft\.SecHealthUI$',
+    # Рабочие приложения, которые часто попадают в списки "мусора", но мусором не являются
+    '^Microsoft\.ZuneMusic$', '^Microsoft\.GetHelp$', '^Microsoft\.MicrosoftStickyNotes$',
+    '^MicrosoftCorporationII\.QuickAssist$'
 )
 # Win32: известный "мусор" (по названию или издателю)
 $BloatWin32 = @(
